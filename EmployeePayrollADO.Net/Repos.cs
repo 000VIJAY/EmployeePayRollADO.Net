@@ -59,5 +59,26 @@ namespace EmployeePayrollADO.Net
             }
             return null;
         }
+        public int UpdateDataOfEmployee()
+        {
+            EmployeeData employee = new EmployeeData();
+            var query = @"UPDATE Employee_Payroll Set Salary = 4000000 where name = 'Terissa'";
+            SqlCommand command = new SqlCommand(query, sql);
+            command.CommandType = CommandType.Text;
+            this.sql.Open();
+            try
+            {
+                command.Parameters.Add("Salary", SqlDbType.BigInt).Value = 4000000;
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            sql.Close();
+            return 400000;
+        }
     }
+    
+    
 }
