@@ -18,5 +18,12 @@ namespace EmployeePayrollTest
             var result = repo.RetrieveDataByName();
             Assert.AreEqual("Vijay Kumar ", result);
         }
+        [TestMethod]
+        public void RetrieveDatabetweenDateTest()
+        {
+            Repos repo = new Repos();
+            var result = repo.RetrieveDataBetweenDateOfJoin();
+            Assert.AreEqual("Terissa", result);
+        }
     }
 }
