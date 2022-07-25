@@ -11,5 +11,12 @@ namespace EmployeePayrollTest
             var result = repo.UpdateDataOfEmployee();
             Assert.AreEqual(400000 ,result);
         }
+        [TestMethod]
+        public void RetrieveDataByNameTest()
+        {
+            Repos repo = new Repos();
+            var result = repo.RetrieveDataByName();
+            Assert.AreEqual("Vijay Kumar ", result);
+        }
     }
 }

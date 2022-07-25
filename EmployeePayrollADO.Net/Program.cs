@@ -3,3 +3,4 @@ Repos repos = new Repos();
 string my = repos.GetAllEmployee();
 Console.WriteLine(my);
 repos.UpdateDataOfEmployee();
+repos.RetrieveDataByName();

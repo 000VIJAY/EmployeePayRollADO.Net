@@ -78,6 +78,52 @@ namespace EmployeePayrollADO.Net
             sql.Close();
             return 400000;
         }
+        public string RetrieveDataByName()
+        {
+            EmployeeData employee = new EmployeeData();
+            var query = @"SELECT * FROM Employee_Payroll where name = 'Vijay Kumar'";
+            SqlCommand command = new SqlCommand(query ,sql);
+          
+            this.sql.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            try
+            {
+                if(reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        employee.Id = reader.GetInt32(0);
+                        employee.name = reader.GetString(1);
+                        employee.Salary = reader.GetDouble(2);
+                        employee.StartDateDate = reader.GetDateTime(3);
+                        employee.Gender = Convert.ToChar(reader.GetString(4));
+                        employee.PhoneNumber = Convert.ToDouble(reader.GetInt64(5));
+                        employee.Address = reader.GetString(6);
+                        employee.Department = reader.GetString(7);
+                        employee.BasicPay = Convert.ToDouble(reader.GetInt64(8));
+                        employee.Deduction = Convert.ToDouble(reader.GetInt64(9));
+                        employee.TaxablePay = Convert.ToDouble(reader.GetInt64(10));
+                        employee.IncomeTax = Convert.ToDouble(reader.GetInt64(11));
+                        employee.NetPay = Convert.ToDouble(reader.GetInt64(12));
+                        Console.WriteLine(" Id: " + employee.Id + " Name: " + employee.name + " Salary: " + employee.Salary + " Start Date: " + employee.StartDateDate + " Gender: " + employee.Gender + " PhNumber: " + employee.PhoneNumber
+                                                  + " Address: " + employee.Address + " Department: " + employee.Department + " Basic Pay: " + employee.BasicPay
+                                                  + " Deductios: " + employee.Deduction + "Taxable Pay: " + employee.TaxablePay + " Income Tax: " + employee.IncomeTax + " Net Pay: " + employee.NetPay);
+                    }
+                }
+                
+                else
+                {
+                    Console.WriteLine("data not found");
+                }
+                reader.Close();
+                this.sql.Close();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            return employee.name;
+        }
     }
     
     
