@@ -169,6 +169,4 @@ namespace EmployeePayrollADO.Net
             return employee.name;
         }
     }
-    
-    
 }
