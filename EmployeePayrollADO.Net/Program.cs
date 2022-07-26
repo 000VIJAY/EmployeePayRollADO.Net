@@ -1,10 +1,11 @@
 ﻿using EmployeePayrollADO.Net;
 Repos repos = new Repos();
-//string my = repos.GetAllEmployee();
-//Console.WriteLine(my);
-//repos.UpdateDataOfEmployee();
-//repos.RetrieveDataByName();
-//repos.RetrieveDataBetweenDateOfJoin();
+string my = repos.GetAllEmployee();
+Console.WriteLine(my);
+repos.UpdateDataOfEmployee();
+repos.RetrieveDataByName();
+repos.RetrieveDataBetweenDateOfJoin();
+repos.AddEmployeePayrollData();
 SalaryOfEmployee employee = new SalaryOfEmployee();
 employee.FindSumOfsalaryOfMale();
 employee.SumOfSalaryOfFemaleEmp();

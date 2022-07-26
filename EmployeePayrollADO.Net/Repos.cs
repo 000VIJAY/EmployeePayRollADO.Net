@@ -168,5 +168,23 @@ namespace EmployeePayrollADO.Net
             }
             return employee.name;
         }
+        public void AddEmployeePayrollData()
+        {
+            EmployeeData employeeData = new EmployeeData();
+            string select = @"Insert into Employee_Payroll (name,Salary,Start,Gender,PhoneNumber,Address,Department,BasicPay,Deductions,TaxablePay,IncomeTax,NetPay) VALUES( 'Nidhi',600000,'10-12-2021','F',943852854728,'Jankipuram','HR',20000,1000,19000,1000,18000)";
+            SqlCommand cmd = new SqlCommand(select, sql);
+            cmd.CommandType = CommandType.Text;
+            sql.Open();
+            try
+            {
+                var con = cmd.ExecuteScalar();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            sql.Close();
+        }
     }
 }
