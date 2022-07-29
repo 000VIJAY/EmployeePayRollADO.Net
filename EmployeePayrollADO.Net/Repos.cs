@@ -171,20 +171,34 @@ namespace EmployeePayrollADO.Net
         public void AddEmployeePayrollData()
         {
             EmployeeData employeeData = new EmployeeData();
-            string select = @"Insert into Employee_Payroll (name,Salary,Start,Gender,PhoneNumber,Address,Department,BasicPay,Deductions,TaxablePay,IncomeTax,NetPay) VALUES( 'Nidhi',600000,'10-12-2021','F',943852854728,'Jankipuram','HR',20000,1000,19000,1000,18000)";
-            SqlCommand cmd = new SqlCommand(select, sql);
-            cmd.CommandType = CommandType.Text;
-            sql.Open();
+           
+            EmployeeData data = new EmployeeData();
+            int Salary = 10000000;
+            employeeData.BasicPay = 10000;
+            employeeData.Deduction = Salary * 0.2;
+            employeeData.TaxablePay = Salary - employeeData.Deduction;
+            employeeData.IncomeTax = employeeData.TaxablePay * 0.1;
+            employeeData.NetPay = Salary - employeeData.IncomeTax;
+            Console.WriteLine("Write the employee id for payroll details");
+            int EmployeeId = Convert.ToInt16(Console.ReadLine());
+              sql.Open();
+            SqlTransaction transaction = sql.BeginTransaction("sampleTransaction");
             try
             {
-                var con = cmd.ExecuteScalar();
-
+            string select = $"Insert into Employee_Payroll (name,Salary,Start,Gender,PhoneNumber,Address,Department) VALUES( 'Aditya Kumar',{Salary},'10-12-2021','F',943852854728,'Jankipuram','HR')";
+            string query = $"Insert into payroll_details (EmployeeId,BasicPay,Deductions,TaxablePay,IncomeTax,NetPay) VALUES ({EmployeeId},{employeeData.BasicPay},{employeeData.Deduction},{employeeData.TaxablePay},{employeeData.IncomeTax},{employeeData.NetPay})";
+            SqlCommand cmd = new SqlCommand(query, sql ,transaction);
+                cmd.ExecuteNonQuery();
+                cmd = new SqlCommand(select, sql ,transaction);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
             }
             catch (Exception ex)
             {
+                transaction.Rollback();
+                sql.Close();
                 Console.WriteLine(ex.Message);
             }
-            sql.Close();
         }
     }
 }
